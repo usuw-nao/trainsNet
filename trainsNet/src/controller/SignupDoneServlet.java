@@ -9,10 +9,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class AdultMypageServlet
+ * Servlet implementation class SignupDoneServlet
  */
-@WebServlet("/AdultMypage")
-public class AdultMypageServlet extends HttpServlet {
+@WebServlet("/SignupDone")
+public class SignupDoneServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
@@ -20,21 +20,8 @@ public class AdultMypageServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		//初期化
-		//AdultQuiz adultQuiz = null;
-		//クイズをDBから取り出す
-		//try {
-		//	AdultQuizDao adultQuizDao = DaoFactory.createAdultQuizDao();
-		//	adultQuiz= adultQuizDao.findById(id());
-
-		//	request.setAttribute("content", adultQuiz.getContent());
-		//	request.setAttribute("choice1", adultQuiz.getChoice1());
-		//	request.setAttribute("choice2", adultQuiz.getChoice2());
-		request.getRequestDispatcher("/WEB-INF/view/adult/adultMypage.jsp")
+		request.getRequestDispatcher("/WEB-INF/view/signupDone.jsp")
 				.forward(request, response);
-		//} catch (Exception e) {
-		//	e.printStackTrace();
-		//}
 	}
 
 	/**

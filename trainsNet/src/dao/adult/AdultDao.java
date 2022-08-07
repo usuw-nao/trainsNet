@@ -9,9 +9,9 @@ public interface AdultDao {
 	// IDを使ってひとりぶんを取り出す？？
 	public Adult findById(Integer id) throws Exception;
 
-	// 更新（住所、メールアドレス、ニックネーム、ログインID）
-	//void update(int id, String login, String nickName, String email, String address) throws Exception;
-	void update(Adult adult) throws Exception;
+	// 更新（住所、メールアドレス、ニックネーム、パス）
+		void update(Integer id, String login, String nickName, String email, String address) throws Exception;
+
 
 	// 削除
 	void delete(int id, String login) throws Exception;

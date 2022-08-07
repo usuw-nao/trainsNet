@@ -24,6 +24,9 @@ public class AdultDaoImpl implements AdultDao {
 		Adult adult = null;
 		try (Connection con = ds.getConnection()) {
 			String sql = "select * from adult where login_id=?";
+			//String sql = "select a.*, Q.*"
+			//		+ " from adult as a inner join adult_Quiz as Q"
+			//		+ " on a.type_id = Q.type_id where login_id='?'";
 			PreparedStatement stmt = con.prepareStatement(sql);
 			stmt.setString(1, login);
 			ResultSet rs = stmt.executeQuery();
@@ -61,16 +64,16 @@ public class AdultDaoImpl implements AdultDao {
 	}
 
 	@Override
-	//public void update(int id, String login, String nickName, String email, String address) throws Exception {
-	public void update(Adult adult) throws Exception {
+	public void update(Integer id, String login, String nickName, String email, String address) throws Exception {
 		try (Connection con = ds.getConnection()) {
 			String sql = "update adult set login_id=?, nick_name=?, email=?, address=? where id=?";
 			PreparedStatement stmt = con.prepareStatement(sql);
-			stmt.setString(1, adult.getLogin());
-			stmt.setString(2, adult.getNickName());
-			stmt.setString(3, adult.getEmail());
-			stmt.setString(4, adult.getAddress());
-			stmt.setObject(5, adult.getId(), Types.INTEGER);
+			stmt.setString(1, login);
+			stmt.setString(2, nickName);
+			stmt.setString(3, email);
+			stmt.setString(4, address);
+			stmt.setObject(5, id, Types.INTEGER);
+
 			stmt.executeUpdate();
 		} catch (Exception e) {
 			throw e;

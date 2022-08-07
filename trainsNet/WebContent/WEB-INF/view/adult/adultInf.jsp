@@ -68,7 +68,10 @@
 
 
 	<p>
-		<a href="AdultLogin">戻る</a>
+		<a href="AdultLogin">ログイン</a>画面に戻る
+	</p>
+	<p>
+		<a href="AdultMypage">マイページ</a>
 	</p>
 </body>
 </html>

@@ -13,6 +13,10 @@ public class DaoFactory {
 		return new dao.IventDaoImpl(getDataSource());
 	}
 
+	public static dao.adult.AdultQuizDao createAdultQuizDao() {
+		return new dao.adult.AdultQuizDaoImpl(getDataSource());
+	}
+
 	private static DataSource getDataSource() {
 		InitialContext ctx = null;
 		DataSource ds = null;

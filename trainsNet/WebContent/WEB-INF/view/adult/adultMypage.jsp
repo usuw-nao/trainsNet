@@ -10,15 +10,35 @@
 </head>
 <body>
 	<h1>ようこそ</h1>
+	<h2>問題に答えてポイントGET！</h2>
+	<form action="" method="post">
+		<p>
+			Q!
+			<c:out value="${adultQuiz.content}" />
+		</p>
+
+
+		<select name="choice" size="2">
+
+			<option value="<c:out value="${adultQuiz.choice1}"/>">
+			<option value="<c:out value="${adultQuiz.choice2}"/>">
+		</select>
+
+	</form>
+
 	<p>
 		<a href="AdultInf">個人情報確認・変更</a>
 	</p>
-	<p>定期の範囲</p>
+	<p>
+		<a href="AdultRange">定期の範囲</a>
+	</p>
 	<p>
 		<a href="IventTop">イベント</a>
 	</p>
 	<p>ポイント</p>
-	<p>クイズ！</p>
+	<p>
+		<a href="AdultQuiz">クイズ!</a>
+	</p>
 	<p>新幹線予約</p>
 
 
