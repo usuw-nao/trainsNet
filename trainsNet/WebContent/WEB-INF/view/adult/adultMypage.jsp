@@ -10,21 +10,26 @@
 </head>
 <body>
 	<h1>ようこそ</h1>
-	<h2>問題に答えてポイントGET！</h2>
+	<h1>１日1回クイズに答えて１０ポイント</h1>
 	<form action="" method="post">
-		<p>
-			Q!
-			<c:out value="${adultQuiz.content}" />
-		</p>
+		<c:forEach items="${AQList}" var="adultQuiz">
+			<p>
+				Q!
+				<c:out value="${adultQuiz.content}" />
+			</p>
+			<br>
+			<p>
+			<input type="radio" name="choice" value="choice1">
+			<c:out value="${adultQuiz.choice1}" />
+			</p>
+			<p>
+			<input type="radio" name="choice" value="choice2">
+			<c:out value="${adultQuiz.choice2}" />
+			</p>
+			</c:forEach>
+			</form>
 
 
-		<select name="choice" size="2">
-
-			<option value="<c:out value="${adultQuiz.choice1}"/>">
-			<option value="<c:out value="${adultQuiz.choice2}"/>">
-		</select>
-
-	</form>
 
 	<p>
 		<a href="AdultInf">個人情報確認・変更</a>
@@ -37,7 +42,7 @@
 	</p>
 	<p>ポイント</p>
 	<p>
-		<a href="AdultQuiz">クイズ!</a>
+		保留（今は使わない）<a href="AdultQuiz">クイズ!</a>
 	</p>
 	<p>新幹線予約</p>
 
