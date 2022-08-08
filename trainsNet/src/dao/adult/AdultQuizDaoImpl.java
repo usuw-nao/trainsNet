@@ -22,8 +22,8 @@ public class AdultQuizDaoImpl implements AdultQuizDao {
 	public AdultQuiz findById(Integer id) throws Exception {
 		AdultQuiz adultQuiz = null;
 		try (Connection con = ds.getConnection()) {
-			//String sql = "select * adult_quiz where id=?";
-			String sql = "select * from adult_quiz order by rand() limit 1";
+			// String sql = "select * adult_quiz where id=?";
+			String sql = "select * from adult_quiz where id=?";
 			PreparedStatement stmt = con.prepareStatement(sql);
 			stmt.setObject(1, id, Types.INTEGER);
 			ResultSet rs = stmt.executeQuery();
@@ -38,12 +38,13 @@ public class AdultQuizDaoImpl implements AdultQuizDao {
 	}
 
 	@Override
-	public List<AdultQuiz> findAll() throws Exception {
+	public List<AdultQuiz> findRandom(int limit) throws Exception {
 		List<AdultQuiz> AQList = new ArrayList<>();
 
 		try (Connection con = ds.getConnection()) {
-			String sql = "select * from adult_quiz order by rand() limit 1";
+			String sql = "select * from adult_quiz order by rand() limit ?";
 			PreparedStatement stmt = con.prepareStatement(sql);
+			stmt.setInt(1, limit);
 			ResultSet rs = stmt.executeQuery();
 			if (rs.next() == true) {
 				AQList.add(mapToAdultQuiz(rs));
@@ -52,6 +53,19 @@ public class AdultQuizDaoImpl implements AdultQuizDao {
 			throw e;
 		}
 		return AQList;
+	}
+
+	@Override
+	public void update(Integer id) throws Exception {
+		try (Connection con = ds.getConnection()) {
+			String sql = "update adult set point = "
+					+ " point + 10 where id=?";
+			PreparedStatement stmt = con.prepareStatement(sql);
+			stmt.setObject(1, id);
+			stmt.executeUpdate();
+		} catch (Exception e) {
+			throw e;
+		}
 
 	}
 
@@ -61,8 +75,10 @@ public class AdultQuizDaoImpl implements AdultQuizDao {
 		String content = rs.getString("content");
 		String choice1 = rs.getString("choice1");
 		String choice2 = rs.getString("choice2");
+		String answer = rs.getString("answer");
+		System.out.println(id);
 
-		return new AdultQuiz(id, typeId, content, choice1, choice2);
+		return new AdultQuiz(id, typeId, content, choice1, choice2, answer);
 
 	}
 

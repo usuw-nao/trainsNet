@@ -6,17 +6,19 @@ public class AdultQuiz {
 	private String content;
 	private String choice1;
 	private String choice2;
+	private String answer;
 
 	public AdultQuiz() {
 
 	}
 
-	public AdultQuiz(Integer id, Integer typeId, String content, String choice1, String choice2) {
+	public AdultQuiz(Integer id, Integer typeId, String content, String choice1, String choice2, String answer) {
 		this.id = id;
 		this.typeId = typeId;
 		this.content = content;
 		this.choice1 = choice1;
 		this.choice2 = choice2;
+		this.answer = answer;
 	}
 
 	public Integer getId() {
@@ -57,6 +59,15 @@ public class AdultQuiz {
 
 	public void setChoice2(String choice2) {
 		this.choice2 = choice2;
+
+	}
+
+	public String getAnswer() {
+		return answer;
+	}
+
+	public void setAnswer(String answer) {
+		this.answer = answer;
 
 	}
 }

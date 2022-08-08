@@ -11,7 +11,9 @@ import javax.servlet.http.HttpServletResponse;
 
 import dao.DaoFactory;
 import dao.IventDao;
+import dao.IventMutterDao;
 import domain.Ivent;
+import domain.IventMutter;
 
 /**
  * Servlet implementation class IventTopServlet
@@ -25,14 +27,18 @@ public class IventTopServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		//イベント情報をDBから取ってきて表示させる
 		try {
+			// イベント情報をDBから取ってきて表示させる
 			IventDao iventDao = DaoFactory.createIventDao();
 			List<Ivent> iventList = iventDao.findAll();
 
+			// 感想をDBから取ってきて表示させる
+			IventMutterDao iventMutterDao = DaoFactory.createIventMutterDao();
+			List<IventMutter> iventMutterList = iventMutterDao.findAll();
+
 			request.setAttribute("iventList", iventList);
-			request.getRequestDispatcher("/WEB-INF/view/iventTop.jsp")
-					.forward(request, response);
+			request.setAttribute("iventMutterList", iventMutterList);
+			request.getRequestDispatcher("/WEB-INF/view/iventTop.jsp").forward(request, response);
 
 		} catch (Exception e) {
 			throw new ServletException(e);
@@ -41,12 +47,29 @@ public class IventTopServlet extends HttpServlet {
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+		request.setCharacterEncoding("UTF-8");
+
+		try {
+			// 入力されたイベント名や感想を取得
+			String name = request.getParameter("name");
+			String text = request.getParameter("text");
+			String iventName = request.getParameter("ivent_name");
+
+			// 感想をデータベースに登録
+			DaoFactory.createIventMutterDao().insert(null);
+
+			// doGetを呼び出す(リダイレクト)
+			response.sendRedirect("IventTop");
+
+		} catch (Exception e) {
+			throw new ServletException(e);
+		}
+
 	}
 
 }

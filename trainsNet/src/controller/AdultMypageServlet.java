@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import dao.DaoFactory;
 import dao.adult.AdultQuizDao;
+import domain.Adult;
 import domain.AdultQuiz;
 
 /**
@@ -27,7 +28,7 @@ public class AdultMypageServlet extends HttpServlet {
 			throws ServletException, IOException {
 		try {
 			AdultQuizDao adultQuizDao = DaoFactory.createAdultQuizDao();
-			List<AdultQuiz> AQList = adultQuizDao.findAll();
+			List<AdultQuiz> AQList = adultQuizDao.findRandom(1);
 			request.setAttribute("AQList", AQList);
 		} catch (Exception e) {
 			throw new ServletException(e);
@@ -42,8 +43,40 @@ public class AdultMypageServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
-	}
+		request.setCharacterEncoding("UTF-8");
+		// ラジオボタンの結果を受け取る,全部送られてきている
+		try {
+			// クイズIDをもとにクイズ情報をもってくる
+			Integer id = Integer.parseInt(request.getParameter("id"));
+			AdultQuiz quiz = DaoFactory.createAdultQuizDao().findById(id);
 
+			// ユーザーの回答を取得
+			String choice = request.getParameter("choice");
+
+			// クイズ情報の答えとユーザーの回答を比較
+			if (quiz.getAnswer().equals(choice)) {
+				// 等しかった場合・10P足す・おめでとう表示
+				System.out.println("OK");
+				try {
+					// adultテーブルのpointを10増やす
+					Adult adult = (Adult) request.getSession().getAttribute("adult");
+					DaoFactory.createAdultDao().update2(adult.getId());
+					request.getRequestDispatcher("/WEB-INF/view/adult/adultQuizOK.jsp").forward(request, response);
+				} catch (Exception e) {
+					throw new ServletException(e);
+				}
+
+			} else {
+				// 違ったばあい足さない残念表示
+				System.out.println("NG");
+				request.getRequestDispatcher("/WEB-INF/view/adult/adultQuizNG.jsp").forward(request, response);
+
+			}
+
+			// 一日一回はJSで書く
+
+		} catch (Exception e) {
+			throw new ServletException(e);
+		}
+	}
 }

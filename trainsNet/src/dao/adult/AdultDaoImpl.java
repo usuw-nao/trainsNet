@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Types;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.sql.DataSource;
 
@@ -19,14 +21,31 @@ public class AdultDaoImpl implements AdultDao {
 	}
 
 	@Override
+	public List<Adult> findAll() throws Exception {
+		List<Adult> adultList = new ArrayList<>();
+
+		try (Connection con = ds.getConnection()) {
+			String sql = "select  nick_name,email,point,address," + "age, name,ivent,distance,start_date,end_date "
+					+ " from adult where login_id=?";
+			PreparedStatement stmt = con.prepareStatement(sql);
+			stmt.setString(1, "loginId");
+			ResultSet rs = stmt.executeQuery();
+			while (rs.next()) {
+				adultList.add(mapToAdult(rs));
+			}
+		} catch (Exception e) {
+			throw e;
+		}
+		return adultList;
+
+	}
+
+	@Override
 	public Adult findByLoginAndPass(String login, String pass) throws Exception {
 		// １件分取り出す
 		Adult adult = null;
 		try (Connection con = ds.getConnection()) {
 			String sql = "select * from adult where login_id=?";
-			//String sql = "select a.*, Q.*"
-			//		+ " from adult as a inner join adult_Quiz as Q"
-			//		+ " on a.type_id = Q.type_id where login_id='?'";
 			PreparedStatement stmt = con.prepareStatement(sql);
 			stmt.setString(1, login);
 			ResultSet rs = stmt.executeQuery();
@@ -35,11 +54,9 @@ public class AdultDaoImpl implements AdultDao {
 					adult = mapToAdult(rs);
 				}
 			}
-
 		} catch (Exception e) {
 			throw e;
 		}
-
 		return adult;
 	}
 
@@ -62,6 +79,7 @@ public class AdultDaoImpl implements AdultDao {
 		return adult;
 
 	}
+	// Idの分を入れて5個にしようね！
 
 	@Override
 	public void update(Integer id, String login, String nickName, String email, String address) throws Exception {
@@ -74,6 +92,32 @@ public class AdultDaoImpl implements AdultDao {
 			stmt.setString(4, address);
 			stmt.setObject(5, id, Types.INTEGER);
 
+			stmt.executeUpdate();
+		} catch (Exception e) {
+			throw e;
+		}
+
+	}
+
+	@Override
+	public void update(Integer id) throws Exception {
+		try (Connection con = ds.getConnection()) {
+			String sql = "update adult set ivent = " + " ivent + 1 where id=?";
+			PreparedStatement stmt = con.prepareStatement(sql);
+			stmt.setObject(1, id);
+			stmt.executeUpdate();
+		} catch (Exception e) {
+			throw e;
+		}
+
+	}
+
+	@Override
+	public void update2(Integer id) throws Exception {
+		try (Connection con = ds.getConnection()) {
+			String sql = "update adult set point = " + " point + 10 where id=?";
+			PreparedStatement stmt = con.prepareStatement(sql);
+			stmt.setObject(1, id);
 			stmt.executeUpdate();
 		} catch (Exception e) {
 			throw e;
@@ -129,6 +173,7 @@ public class AdultDaoImpl implements AdultDao {
 		adult.setAddress(rs.getString("address"));
 		adult.setAge(rs.getInt("age"));
 		adult.setIvent(rs.getInt("ivent"));
+		adult.setPoint(rs.getInt("point"));
 		adult.setDistance(rs.getString("distance"));
 		adult.setStartDate(rs.getDate("start_date"));
 		adult.setEndDate(rs.getDate("end_date"));

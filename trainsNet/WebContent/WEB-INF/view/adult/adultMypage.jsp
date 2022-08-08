@@ -19,15 +19,20 @@
 			</p>
 			<br>
 			<p>
-			<input type="radio" name="choice" value="choice1">
-			<c:out value="${adultQuiz.choice1}" />
+				<input type="radio" name="choice" value="choice1">
+				<c:out value="${adultQuiz.choice1}" />
 			</p>
 			<p>
-			<input type="radio" name="choice" value="choice2">
-			<c:out value="${adultQuiz.choice2}" />
+				<input type="radio" name="choice" value="choice2">
+				<c:out value="${adultQuiz.choice2}" />
 			</p>
-			</c:forEach>
-			</form>
+			<input type="hidden" name="id" value="${adultQuiz.id}">
+
+			<p>
+				<input type="submit" value="決定">
+			</p>
+		</c:forEach>
+	</form>
 
 
 
@@ -41,11 +46,11 @@
 		<a href="IventTop">イベント</a>
 	</p>
 	<p>ポイント</p>
-	<p>
-		保留（今は使わない）<a href="AdultQuiz">クイズ!</a>
-	</p>
-	<p>新幹線予約</p>
 
+	<p>新幹線予約</p>
+	<p>
+		<a href="AdultLogout">ログアウト</a>
+	</p>
 
 
 

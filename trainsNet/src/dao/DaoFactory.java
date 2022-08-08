@@ -17,6 +17,10 @@ public class DaoFactory {
 		return new dao.adult.AdultQuizDaoImpl(getDataSource());
 	}
 
+	public static dao.IventMutterDao createIventMutterDao() {
+		return new dao.IventMutterDaoImpl(getDataSource());
+	}
+
 	private static DataSource getDataSource() {
 		InitialContext ctx = null;
 		DataSource ds = null;

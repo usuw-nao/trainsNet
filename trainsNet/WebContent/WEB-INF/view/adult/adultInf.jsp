@@ -38,6 +38,10 @@
 			<td><c:out value="${adult.ivent}" /></td>
 		</tr>
 		<tr>
+			<th>保有ポイント</th>
+			<td><c:out value="${adult.point}" /></td>
+		</tr>
+		<tr>
 			<th>定期範囲</th>
 			<td><c:out value="${adult.distance}" /></td>
 		</tr>
