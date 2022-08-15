@@ -31,13 +31,12 @@ public class IventTopServlet extends HttpServlet {
 			// イベント情報をDBから取ってきて表示させる
 			IventDao iventDao = DaoFactory.createIventDao();
 			List<Ivent> iventList = iventDao.findAll();
+			request.setAttribute("iventList", iventList);
 
 			// 感想をDBから取ってきて表示させる
 
 			IventMutterDao iventMutterDao = DaoFactory.createIventMutterDao();
 			List<IventMutter> iventMutterList = iventMutterDao.findAll();
-
-			request.setAttribute("iventList", iventList);
 			request.setAttribute("iventMutterList", iventMutterList);
 			request.getRequestDispatcher("/WEB-INF/view/iventTop.jsp").forward(request, response);
 
@@ -56,13 +55,17 @@ public class IventTopServlet extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 
 		try {
-			IventMutter iventMutter = new IventMutter();
+			//IventMutter iventMutter = new IventMutter();
 			// 入力されたイベント名や感想を取得
 			String name = request.getParameter("name");
 			String text = request.getParameter("text");
 			String iventName = request.getParameter("ivent_name");
 
-			//IventMutter iventMutter = new IventMutter();
+			request.setAttribute("name", name);
+			request.setAttribute("text", text);
+			request.setAttribute("ivent_name", iventName);
+
+			IventMutter iventMutter = new IventMutter();
 			iventMutter.setName(name);
 			iventMutter.setText(text);
 			iventMutter.setIventName(iventName);
@@ -71,7 +74,7 @@ public class IventTopServlet extends HttpServlet {
 			DaoFactory.createIventMutterDao().insert(iventMutter);
 
 			// doGetを呼び出す(リダイレクト)
-			response.sendRedirect("IventTop");
+			response.sendRedirect(request.getContextPath() + "/IventTop");
 
 		} catch (Exception e) {
 			throw new ServletException(e);

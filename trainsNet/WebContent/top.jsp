@@ -59,8 +59,13 @@
 					<div class="row">
 						<div class="animal col-md-6 col-lg-4 mb-4">
 							<img class="img-thumbnail w-100" src="images/animal1.jpg">
-							<h3>オトナの人？こどもの人？</h3>
+							<h3>大人はこちら</h3>
 							おとなのひと<a href="AdultLogin" class="btn btn-primary">ログイン</a>
+						</div>
+
+						<div class="animal col-md-6 col-lg-4 mb-4">
+							<img class="img-thumbnail w-100" src="images/animal4.jpg">
+							<h3>子どもの人はこちら</h3>
 							<p>
 								こどものひと<a href="" class="btn btn-primary">ろぐいん</a>
 							</p>
@@ -80,17 +85,7 @@
 							<a href="" class="btn btn-primary">電車発車確認</a>
 						</div>
 
-						<div class="animal col-md-6 col-lg-4 mb-4">
-							<img class="img-thumbnail w-100" src="images/animal4.jpg">
-							<h3>各駅の名前</h3>
-							<a href="" class="btn btn-primary">各駅の名前</a>
-						</div>
 
-						<div class="animal col-md-6 col-lg-4 mb-4">
-							<img class="img-thumbnail w-100" src="images/animal4.jpg">
-							<h3>各駅の名前</h3>
-							<a href="" class="btn btn-primary">各駅の名前</a>
-						</div>
 
 					</div>
 				</div>
@@ -98,6 +93,7 @@
 			</div>
 			<!-- /.col -->
 			<div class="col-lg-4">
+			<br><br>
 				<h2>Infomation~お知らせ~</h2>
 				<p>現在お知らせはございません</p>
 
@@ -117,6 +113,7 @@
 	</div>
 	<!-- /.row -->
 	</main>
+	<br><br>
 	<!--Footer IN-->
 	<div id="footer">
 		<ul class="footer">

@@ -27,12 +27,25 @@ public class IventMutterDaoImpl implements IventMutterDao {
 			String sql = "select * from ivent_mutter order by id DESC";
 			PreparedStatement pStmt = con.prepareStatement(sql);
 			ResultSet rs = pStmt.executeQuery();
+			while (rs.next()) {
+				iventMutterList.add(mapToIventMutter(rs));
+			}
 
 		} catch (SQLException e) {
 			e.printStackTrace();
 
 		}
 		return iventMutterList;
+	}
+
+	private IventMutter mapToIventMutter(ResultSet rs) throws Exception {
+		IventMutter iventMutter = new IventMutter();
+		iventMutter.setId(rs.getInt("id"));
+		iventMutter.setName(rs.getString("name"));
+		iventMutter.setText(rs.getString("text"));
+		iventMutter.setIventName(rs.getString("iventName"));
+		return iventMutter;
+
 	}
 
 	@Override
@@ -56,7 +69,19 @@ public class IventMutterDaoImpl implements IventMutterDao {
 
 	@Override
 	public void updated(IventMutter iventMutter) throws Exception {
-		// TODO 自動生成されたメソッド・スタブ
+		try (Connection con = ds.getConnection()) {
+			String sql = "UPDATE ivent_mutter "
+					+ " SET name = ?, text = ?, ivent_name = ? "
+					+ " WHERE id = ?";
+			PreparedStatement stmt = con.prepareStatement(sql);
+			stmt.setString(1, iventMutter.getName());
+			stmt.setObject(2, iventMutter.getText());
+			stmt.setString(3, iventMutter.getIventName());
+			stmt.setObject(5, iventMutter.getId(), Types.INTEGER);
+			stmt.executeUpdate();
+		} catch (Exception e) {
+			throw e;
+		}
 
 	}
 

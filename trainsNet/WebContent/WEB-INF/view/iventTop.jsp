@@ -57,27 +57,29 @@ String errorMsg = (String) request.getAttribute("errorMsg");
 				</c:forEach>
 			</select>
 		<p>
-			感想<input type="textarea" name="text">
+			感想<input type="text" name="text">
 		</p>
-		<input type="hidden" name="id" value="${ivent_mutter.id }">
+		<input type="hidden" name="id" value="${iventMutter.id }">
 		<p>
 
 			<input type="submit" value="投稿する">
 		</p>
 	</form>
-	//表示する
-	<c:if test="${not empty errormsg}">
-		<p>${errormsg }</p>
-	</c:if>
+	//表示する 多分、ここでiventMutterが取れてない（送れてない） でもiventMutterの送り方がわからん。0815
+
 
 	<c:forEach var="iventMutter" items="${iventMutterList}">
+
+
 		<p>
+			<c:out value="${iventMutter.id}" />
 			<c:out value="${iventMutter.name}" />
 			:
-			<c:out value="${iventMutter.iventName}" />
+			<c:out value="${iventMutter.ivent_name}" />
 			:
 			<c:out value="${iventMutter.text}" />
 		</p>
+
 	</c:forEach>
 
 	<p>
