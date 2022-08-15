@@ -39,6 +39,7 @@ create database mytrains_db
 character set utf8mb4
 create database mytrains_db character set utf8mb4 collate utf8mb4_general_ci;
 use mytrains_db;
+
 create table adult
 (
    id int primary key auto_increment,
@@ -54,7 +55,8 @@ create table adult
    ivent int,
    distance varchar (255),
    start_date date,
-   end_date date
+   end_date date,
+   date datetime DEFAULT NULL
 );
 INSERT INTO adult VALUES
 (
@@ -71,9 +73,11 @@ INSERT INTO adult VALUES
    2,
    '函館から札幌経由稚内経由利尻',
    20220801,
-   20221031
+   20221031,
+   20220731
 );
-//イベントテーブル作成 create table ivent
+//イベントテーブル作成 （ここのみ連休中更新ない）
+create table ivent
 (
    id int primary key auto_increment,
    name varchar (30) not null,
@@ -123,7 +127,8 @@ WHERE
    content varchar (255) not null,
    choice1 varchar (50) not null,
    choice2 varchar (50) not null,
-   answer varchar (10) not null
+   answer varchar (10) not null,
+   date datetime default null
 );
 insert into adult_quiz values
 (
@@ -161,13 +166,12 @@ insert into adult_quiz values
    '横浜',
    '横浜'
 );
-
+連休中に新しく
 create table ivent_mutter (
 id int primary key auto_increment,
 name varchar(20) not null,
 text varchar(255) not null,
-ivent_name varchar(30) not null
+ivent_name varchar(30) not null,
+date datetime DEFAULT NULL
+
 );
-Footer
-© 2022 GitHub, Inc.
-Footer navigation

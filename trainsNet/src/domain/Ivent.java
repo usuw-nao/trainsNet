@@ -6,6 +6,7 @@ public class Ivent {
 	private Integer id;
 	private String name;
 	private String detail;
+	private String place;
 	private Date day;
 
 	public Integer getId() {
@@ -30,6 +31,14 @@ public class Ivent {
 
 	public void setDetail(String detail) {
 		this.detail = detail;
+	}
+
+	public String getPlace() {
+		return place;
+	}
+
+	public void setPlace(String place) {
+		this.place = place;
 	}
 
 	public Date getDay() {

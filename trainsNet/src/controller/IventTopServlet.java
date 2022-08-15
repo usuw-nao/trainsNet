@@ -33,6 +33,7 @@ public class IventTopServlet extends HttpServlet {
 			List<Ivent> iventList = iventDao.findAll();
 
 			// 感想をDBから取ってきて表示させる
+
 			IventMutterDao iventMutterDao = DaoFactory.createIventMutterDao();
 			List<IventMutter> iventMutterList = iventMutterDao.findAll();
 
@@ -55,21 +56,26 @@ public class IventTopServlet extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 
 		try {
+			IventMutter iventMutter = new IventMutter();
 			// 入力されたイベント名や感想を取得
 			String name = request.getParameter("name");
 			String text = request.getParameter("text");
 			String iventName = request.getParameter("ivent_name");
 
+			//IventMutter iventMutter = new IventMutter();
+			iventMutter.setName(name);
+			iventMutter.setText(text);
+			iventMutter.setIventName(iventName);
+
 			// 感想をデータベースに登録
-			DaoFactory.createIventMutterDao().insert(null);
+			DaoFactory.createIventMutterDao().insert(iventMutter);
 
 			// doGetを呼び出す(リダイレクト)
 			response.sendRedirect("IventTop");
 
 		} catch (Exception e) {
 			throw new ServletException(e);
+
 		}
-
 	}
-
 }

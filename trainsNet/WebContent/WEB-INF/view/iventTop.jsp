@@ -1,9 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ page import="domain.Adult,domain.IventMutter,java.util.List"%>
 <%
 Adult login = (Adult) session.getAttribute("login");
+
 String errorMsg = (String) request.getAttribute("errorMsg");
 %>
 
@@ -42,43 +44,41 @@ String errorMsg = (String) request.getAttribute("errorMsg");
 	</table>
 	<h1>みんなの感想☆彡</h1>
 	<p>イベントに参加した感想を自由に教えてね！</p>
-	<form action="/TrainApp/IventTop" method="post">
+	<form action="/trainsNet/IventTop" method="post">
 		<p>
-			<input type="text" name="name" value="${adult.nickName }">さん
+			お名前<input type="text" name="name" value="${adult.nickName }">さん
 		</p>
 		<p>
-			イベント名<select name="iventName" id="iventName">
+			イベント名<select name="ivent_name" id="ivent_name">
 				<c:forEach items="${iventList}" var="ivent">
 					<option>
 						<c:out value="${ivent.name }" />
-
-
 					</option>
 				</c:forEach>
-
 			</select>
-		</p>
 		<p>
 			感想<input type="textarea" name="text">
 		</p>
-
 		<input type="hidden" name="id" value="${ivent_mutter.id }">
 		<p>
+
 			<input type="submit" value="投稿する">
 		</p>
 	</form>
-	<c:forEach items="${iventMutterList }" var="iventMutter">
-		<c:out value="${iventMutter.getText }" />
+	//表示する
+	<c:if test="${not empty errormsg}">
+		<p>${errormsg }</p>
+	</c:if>
 
+	<c:forEach var="iventMutter" items="${iventMutterList}">
+		<p>
+			<c:out value="${iventMutter.name}" />
+			:
+			<c:out value="${iventMutter.iventName}" />
+			:
+			<c:out value="${iventMutter.text}" />
+		</p>
 	</c:forEach>
-
-
-
-
-
-
-
-
 
 	<p>
 		<a href="AdultMypage">マイページに戻る</a>

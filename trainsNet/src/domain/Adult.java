@@ -29,6 +29,7 @@ public class Adult {
 	private Date startDate;
 	//定期（持っていたら）の終了時期
 	private Date endDate;
+	private Date date;
 
 
 	public Integer getId() {
@@ -141,6 +142,13 @@ public class Adult {
 
 	public void setEndDate(Date endDate) {
 		this.endDate = endDate;
+	}
+	public Date getDate() {
+		return date;
+	}
+
+	public void setDate(Date date) {
+		this.date = date;
 	}
 
 }

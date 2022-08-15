@@ -1,5 +1,7 @@
 package domain;
 
+import java.util.Date;
+
 public class AdultQuiz {
 	private Integer id;
 	private Integer typeId;
@@ -7,6 +9,7 @@ public class AdultQuiz {
 	private String choice1;
 	private String choice2;
 	private String answer;
+	private Date date;
 
 	public AdultQuiz() {
 
@@ -69,5 +72,13 @@ public class AdultQuiz {
 	public void setAnswer(String answer) {
 		this.answer = answer;
 
+	}
+
+	public Date getDate() {
+		return date;
+	}
+
+	public void setDate(Date date) {
+		this.date = date;
 	}
 }

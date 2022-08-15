@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Types;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.sql.DataSource;
@@ -79,6 +80,22 @@ public class AdultQuizDaoImpl implements AdultQuizDao {
 		System.out.println(id);
 
 		return new AdultQuiz(id, typeId, content, choice1, choice2, answer);
+
+	}
+
+	@Override
+	public void updateDate(Integer id, Date date) throws Exception {
+		try (Connection con = ds.getConnection()) {
+			String sql = "UPDATE adult_quiz"
+					+ " SET date= now()"
+					+ " WHERE id = ?";
+			PreparedStatement stmt = con.prepareStatement(sql);
+			stmt.setObject(1, id, Types.INTEGER);
+			stmt.executeUpdate();
+
+		} catch (Exception e) {
+			throw e;
+		}
 
 	}
 

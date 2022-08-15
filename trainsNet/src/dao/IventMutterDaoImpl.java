@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Types;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -36,6 +37,20 @@ public class IventMutterDaoImpl implements IventMutterDao {
 
 	@Override
 	public void insert(IventMutter iventMutter) throws Exception {
+		try {
+			Connection con = ds.getConnection();
+			String sql = "insert into ivent_mutter values(?,?,?,?)";
+			PreparedStatement stmt = con.prepareStatement(sql);
+			stmt.setObject(1, iventMutter.getId(), Types.INTEGER);
+			stmt.setString(2, iventMutter.getName());
+			stmt.setString(3, iventMutter.getText());
+			stmt.setString(4, iventMutter.getIventName());
+
+			stmt.executeUpdate();
+
+		} catch (Exception e) {
+			throw e;
+		}
 
 	}
 

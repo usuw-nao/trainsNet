@@ -1,5 +1,6 @@
 package dao.adult;
 
+import java.util.Date;
 import java.util.List;
 
 import domain.AdultQuiz;
@@ -12,5 +13,6 @@ public interface AdultQuizDao {
 	List<AdultQuiz> findRandom(int limit) throws Exception;
 
 	public void update(Integer id) throws Exception;
+	public void updateDate(Integer id, Date date) throws Exception;
 
 }
